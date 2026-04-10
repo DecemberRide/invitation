@@ -154,6 +154,23 @@
       transform-style: preserve-3d;
     }
 
+    .envelope-wrap .letter {
+      z-index: 2;
+      pointer-events: auto;
+    }
+
+    .envelope-wrap .envelope {
+      z-index: 5;
+    }
+
+    .envelope-wrap.open .envelope {
+      z-index: 1;
+    }
+
+    .envelope-wrap.open .letter {
+      z-index: 6;
+    }
+
     .envelope {
       position: absolute;
       bottom: 0;
@@ -386,6 +403,11 @@
       background: rgba(255,255,255,.7);
       color: var(--ink);
       border: 1px solid rgba(212,175,55,.28);
+      position: relative;
+    }
+
+    .response-link.no:hover {
+      transform: translateY(-1px) translateX(6px);
     }
 
     .hidden-message.show {
@@ -423,11 +445,20 @@
       <div class="glow"></div>
 
       <div class="envelope-wrap" id="envelopeScene">
-        <div class="letter" aria-live="polite">
+        <div class="envelope" id="envelope">
+          <div class="env-back"></div>
+          <div class="env-front"></div>
+          <div class="env-left"></div>
+          <div class="env-right"></div>
+          <div class="env-flap"></div>
+          <div class="seal" id="seal">✦</div>
+        </div>
+
+        <div class="letter" id="letterCard" aria-live="polite">
           <div class="letter-inner">
             <div class="letter-top">Pour une soirée particulière</div>
             <div class="ornament">✦ ❦ ✦</div>
-            <h2>Vous êtes invitée</h2>
+            <h2>Annia, vous êtes invitée</h2>
             <p>
               Demain soir, si vous acceptez cette invitation,
               je viendrai après le travail avec une surprise rien que pour vous.
@@ -445,20 +476,23 @@
             <button class="reveal" id="revealButton">Voir le dernier mot</button>
             <div class="hidden-message" id="hiddenMessage">
               Et si vous dites oui…<br />
-              samedi soir, je viens à Roanne pour vous.<br />
+              samedi soir, je viens à Roanne rein que  pour vous.<br />
               <strong>Acceptez-vous cette invitation&nbsp;?</strong>
             </div>
             <div class="response-box" id="responseBox">
               <p class="response-question">Choisissez votre réponse :</p>
               <div class="response-actions">
-                <a class="response-link yes" href="mailto:tonadresse@mail.com?subject=J%27accepte%20ton%20invitation&body=Oui%2C%20j%27accepte%20ton%20invitation%20pour%20samedi%20soir%20%E2%9D%A4%EF%B8%8F">Oui, j’accepte</a>
-                <a class="response-link no" href="mailto:tonadresse@mail.com?subject=Pour%20samedi%20soir&body=Je%20te%20dis%20vite%20si%20je%20peux%20%E2%9C%A8">Je te redis</a>
+                <a class="response-link yes" href="mailto:lolascala@icloud.com?subject=J%27accepte%20ton%20invitation&body=Oui%2C%20j%27accepte%20ton%20invitation%20pour%20samedi%20soir%20%E2%9D%A4%EF%B8%8F">Oui, j’accepte</a>
+                <a class="response-link no" href="mailto:lolascala@icloud.com?subject=Je%20crois%20que%20tu%20t%27es%20loup%C3%A9e&body=Je%20crois%20que%20tu%20t%27es%20loup%C3%A9e%2C%20le%20bouton%20oui%20est%20%C3%A0%20gauche%20%F0%9F%98%82"
+                >Je te redis</a>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="envelope" id="envelope">
+        <div class="floating-note">
+          Cliquez sur le cachet rouge ou sur l’enveloppe pour découvrir votre invitation.
+        </div> id="envelope">
           <div class="env-back"></div>
           <div class="env-front"></div>
           <div class="env-left"></div>
