@@ -278,30 +278,38 @@
     }
 
     .letter {
-      position: absolute;
-      left: 50%;
-      bottom: 108px;
-      transform: translate(-50%, 64%) scale(.94);
-      width: 95%;
-      max-width: 520px;
-      height: 92%;
-      max-height: 720px;
-      background: linear-gradient(180deg, #ffffff 0%, #fff7ed 100%);
-      color: var(--ink);
-      border-radius: 16px;
-      padding: 28px;
-      box-sizing: border-box;
-      overflow-y: auto;
-      overflow-x: hidden;
-      opacity: 0;
-      border: 2px solid rgba(212,175,55,0.60);
-      box-shadow:
-        0 30px 80px rgba(0,0,0,0.18),
-        0 0 0 4px rgba(212,175,55,0.12);
-      transition:
-        transform 1.2s cubic-bezier(.2,.8,.2,1),
-        opacity .9s ease;
-    }
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 95%;
+  max-width: 520px;
+
+  height: 90%;
+  max-height: 700px;
+
+  background: linear-gradient(180deg, #ffffff 0%, #fff7ed 100%);
+  color: var(--ink);
+
+  border-radius: 16px;
+  padding: 28px;
+
+  box-sizing: border-box;
+  overflow-y: auto;
+
+  opacity: 0;
+
+  border: 2px solid rgba(212,175,55,0.60);
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.18),
+    0 0 0 4px rgba(212,175,55,0.12);
+
+  /* Position de départ (dans l’enveloppe) */
+  transform: translate(-50%, 80%) scale(.9);
+
+  transition: transform 1.2s cubic-bezier(.2,.8,.2,1), opacity .9s ease;
+}
 
     .letter::before {
       content: "";
@@ -379,9 +387,11 @@
     }
 
     .open .letter {
-      opacity: 1;
-      transform: translate(-50%, -22%) scale(1);
-    }
+  opacity: 1;
+
+  /* Position finale = PARFAITEMENT CENTRÉ */
+  transform: translate(-50%, -50%) scale(1);
+}
 
     .floating-note {
       position: absolute;
@@ -513,13 +523,10 @@
       }
 
       .letter {
-        width: 95%;
-        max-width: 95%;
-        height: 88%;
-        max-height: none;
-        bottom: 130px;
-        padding: 20px;
-      }
+    width: 95%;
+    height: 90%;
+    padding: 20px;
+  }
 
       .open .letter {
         transform: translate(-50%, -14%) scale(1);
