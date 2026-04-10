@@ -418,13 +418,13 @@
           </div>
         </div>
 
-        <div class="envelope open" id="envelope">
+        <div class="envelope" id="envelope">
           <div class="env-back"></div>
           <div class="env-front"></div>
           <div class="env-left"></div>
           <div class="env-right"></div>
           <div class="env-flap"></div>
-          <div class="seal">✦</div>
+          <div class="seal" id="seal">✦</div>
         </div>
 
         <div class="floating-note">
@@ -439,11 +439,17 @@
     const experience = document.getElementById('experience');
     const openInvitation = document.getElementById('openInvitation');
     const revealButton = document.getElementById('revealButton');
+    const seal = document.getElementById('seal');
+    const envelope = document.getElementById('envelope');
     const hiddenMessage = document.getElementById('hiddenMessage');
 
     openInvitation.addEventListener('click', () => {
       intro.style.display = 'none';
       experience.classList.add('active');
+
+      // ouverture uniquement via le cachet
+      // (on enlève l'ouverture automatique)
+    });
     });
 
     revealButton.addEventListener('click', () => {
@@ -451,6 +457,11 @@
       revealButton.textContent = hiddenMessage.classList.contains('show')
         ? 'Refermer le dernier mot'
         : 'Voir le dernier mot';
+    });
+
+    // ouverture au clic sur le cachet
+    seal.addEventListener('click', () => {
+      envelope.classList.add('open');
     });
   </script>
 </body>
