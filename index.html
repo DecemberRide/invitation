@@ -12,7 +12,6 @@
       --paper: #fffdf9;
       --ink: #3e1f23;
       --wax: #9e1b32;
-      --wax-dark: #7d1427;
       --white: #fffdf8;
       --shadow: 0 20px 60px rgba(80, 34, 42, 0.16);
     }
@@ -128,7 +127,7 @@
     .scene {
       position: relative;
       width: min(92vw, 760px);
-      height: min(82vh, 700px);
+      height: min(86vh, 760px);
       display: grid;
       place-items: center;
       perspective: 1600px;
@@ -147,7 +146,7 @@
     .envelope-wrap {
       position: relative;
       width: min(88vw, 640px);
-      height: 440px;
+      height: 560px;
       display: grid;
       place-items: center;
       transform-style: preserve-3d;
@@ -162,7 +161,7 @@
     }
 
     .envelope-wrap.open .envelope {
-      z-index: 1;
+      z-index: 3;
     }
 
     .envelope-wrap.open .letter {
@@ -174,7 +173,7 @@
       width: 100%;
       max-width: 620px;
       height: 360px;
-      bottom: 0;
+      bottom: 48px;
       cursor: pointer;
       filter: drop-shadow(0 22px 28px rgba(0,0,0,0.16));
     }
@@ -279,36 +278,30 @@
     }
 
     .letter {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, 120%);
-  
-  width: 95%;
-  max-width: 520px;
-
-  height: 90%;
-  max-height: 700px;
-
-  background: linear-gradient(180deg, #ffffff 0%, #fff7ed 100%);
-  color: var(--ink);
-
-  border-radius: 16px;
-  padding: 28px;
-
-  box-sizing: border-box;
-  overflow-y: auto;
-
-  opacity: 0;
-
-  border: 2px solid rgba(212,175,55,0.65);
-
-  box-shadow:
-    0 30px 80px rgba(0,0,0,0.18),
-    0 0 0 4px rgba(212,175,55,0.12);
-
-  transition: transform 1.1s cubic-bezier(.2,.8,.2,1), opacity .9s ease;
-}
+      position: absolute;
+      left: 50%;
+      bottom: 108px;
+      transform: translate(-50%, 64%) scale(.94);
+      width: 95%;
+      max-width: 520px;
+      height: 92%;
+      max-height: 720px;
+      background: linear-gradient(180deg, #ffffff 0%, #fff7ed 100%);
+      color: var(--ink);
+      border-radius: 16px;
+      padding: 28px;
+      box-sizing: border-box;
+      overflow-y: auto;
+      overflow-x: hidden;
+      opacity: 0;
+      border: 2px solid rgba(212,175,55,0.60);
+      box-shadow:
+        0 30px 80px rgba(0,0,0,0.18),
+        0 0 0 4px rgba(212,175,55,0.12);
+      transition:
+        transform 1.2s cubic-bezier(.2,.8,.2,1),
+        opacity .9s ease;
+    }
 
     .letter::before {
       content: "";
@@ -326,7 +319,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      border-radius: 12px;
+      border-radius: 14px;
       box-shadow: inset 0 0 30px rgba(212,175,55,.08);
       pointer-events: none;
     }
@@ -352,7 +345,7 @@
 
     .letter h2 {
       margin: 0;
-      font-size: clamp(2rem, 4vw, 3.1rem);
+      font-size: clamp(2.2rem, 4vw, 3.3rem);
       font-weight: 500;
       line-height: 1.08;
     }
@@ -366,8 +359,8 @@
 
     .letter p {
       margin: 0;
-      font-size: clamp(1rem, 2vw, 1.08rem);
-      line-height: 1.9;
+      font-size: clamp(1.02rem, 2vw, 1.14rem);
+      line-height: 2;
     }
 
     .signature {
@@ -386,13 +379,13 @@
     }
 
     .open .letter {
-  opacity: 1;
-  transform: translate(-50%, -50%);
-}
+      opacity: 1;
+      transform: translate(-50%, -22%) scale(1);
+    }
 
     .floating-note {
       position: absolute;
-      bottom: -62px;
+      bottom: -20px;
       left: 50%;
       transform: translateX(-50%);
       font-size: .92rem;
@@ -499,12 +492,17 @@
         padding: 34px 20px;
       }
 
+      .scene {
+        height: 92vh;
+      }
+
       .envelope-wrap {
-        height: 380px;
+        height: 620px;
       }
 
       .envelope {
         height: 300px;
+        bottom: 90px;
       }
 
       .seal {
@@ -515,18 +513,24 @@
       }
 
       .letter {
-    width: 95%;
-    height: 92%;
-    padding: 20px;
-    border-radius: 14px;
-  }
+        width: 95%;
+        max-width: 95%;
+        height: 88%;
+        max-height: none;
+        bottom: 130px;
+        padding: 20px;
+      }
+
+      .open .letter {
+        transform: translate(-50%, -14%) scale(1);
+      }
 
       .letter-inner {
         gap: 16px;
       }
 
       .floating-note {
-        bottom: -80px;
+        bottom: 8px;
         font-size: .88rem;
       }
     }
@@ -614,7 +618,7 @@
         </div>
 
         <div class="floating-note">
-          Brisez le sceau pour voir votre invitation.
+          Cliquez sur le cachet rouge ou sur l’enveloppe pour découvrir votre invitation.
         </div>
       </div>
     </div>
