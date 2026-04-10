@@ -202,7 +202,7 @@
       position: absolute;
       bottom: 46px;
       width: min(80vw, 540px);
-      height: min(72vh, 620px);
+      max-height: min(72vh, 620px);
       background:
         linear-gradient(180deg, rgba(255,255,255,.8), transparent 10%),
         linear-gradient(180deg, var(--paper) 0%, #fbf4ea 100%);
@@ -213,7 +213,8 @@
       transform: translateY(180px) scale(.78);
       opacity: 0;
       z-index: 3;
-      overflow: hidden;
+      overflow-y: auto;
+      overflow-x: hidden;
       transition: transform 1.35s cubic-bezier(.2,.8,.2,1), opacity .9s ease;
     }
 
@@ -234,7 +235,7 @@
       position: relative;
       padding: 52px 34px 40px;
       text-align: center;
-      height: 100%;
+      min-height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -321,11 +322,70 @@
     }
 
     .hidden-message {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .5s ease, margin-top .5s ease;
+      display: none;
+      margin-top: 8px;
       font-size: 1rem;
       color: rgba(62,31,35,.82);
+      line-height: 1.8;
+    }
+
+    .hidden-message.show {
+      display: block;
+    }
+
+    .response-box {
+      display: none;
+      margin-top: 14px;
+      padding: 16px;
+      border: 1px solid rgba(212,175,55,.28);
+      border-radius: 18px;
+      background: rgba(158,27,50,.05);
+    }
+
+    .response-box.show {
+      display: block;
+    }
+
+    .response-question {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: rgba(62,31,35,.9);
+    }
+
+    .response-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .response-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: .95rem;
+      transition: transform .2s ease, opacity .2s ease, background .2s ease;
+    }
+
+    .response-link:hover {
+      transform: translateY(-1px);
+    }
+
+    .response-link.yes {
+      background: linear-gradient(180deg, rgba(158,27,50,.96), rgba(125,20,39,.96));
+      color: #fffdf8;
+      border: 1px solid rgba(158,27,50,.26);
+      box-shadow: 0 10px 24px rgba(158,27,50,.12);
+    }
+
+    .response-link.no {
+      background: rgba(255,255,255,.7);
+      color: var(--ink);
+      border: 1px solid rgba(212,175,55,.28);
     }
 
     .hidden-message.show {
@@ -388,6 +448,13 @@
               samedi soir, je viens à Roanne pour vous.<br />
               <strong>Acceptez-vous cette invitation&nbsp;?</strong>
             </div>
+            <div class="response-box" id="responseBox">
+              <p class="response-question">Choisissez votre réponse :</p>
+              <div class="response-actions">
+                <a class="response-link yes" href="mailto:tonadresse@mail.com?subject=J%27accepte%20ton%20invitation&body=Oui%2C%20j%27accepte%20ton%20invitation%20pour%20samedi%20soir%20%E2%9D%A4%EF%B8%8F">Oui, j’accepte</a>
+                <a class="response-link no" href="mailto:tonadresse@mail.com?subject=Pour%20samedi%20soir&body=Je%20te%20dis%20vite%20si%20je%20peux%20%E2%9C%A8">Je te redis</a>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -408,6 +475,7 @@
   </section>
 
   <script>
+  document.addEventListener('DOMContentLoaded', () => {
     const intro = document.getElementById('intro');
     const experience = document.getElementById('experience');
     const openInvitation = document.getElementById('openInvitation');
@@ -417,33 +485,45 @@
     const envelope = document.getElementById('envelope');
     const envelopeScene = document.getElementById('envelopeScene');
 
-    openInvitation.addEventListener('click', () => {
-      intro.style.display = 'none';
-      experience.classList.add('active');
-    });
+    if (openInvitation && intro && experience) {
+      openInvitation.addEventListener('click', () => {
+        intro.style.display = 'none';
+        experience.classList.add('active');
+      });
+    }
 
-    const openEnvelope = () => {
-      if (!envelopeScene.classList.contains('open')) {
+    const openEnvelope = (event) => {
+      if (event) event.stopPropagation();
+      if (envelopeScene) {
         envelopeScene.classList.add('open');
       }
     };
 
     if (seal) {
-      seal.addEventListener('click', (event) => {
-        event.stopPropagation();
-        openEnvelope();
-      });
+      seal.addEventListener('click', openEnvelope);
+      seal.style.cursor = 'pointer';
     }
 
     if (envelope) {
-      envelope.addEven
+      envelope.addEventListener('click', openEnvelope);
+      envelope.style.cursor = 'pointer';
+    }
 
-    revealButton.addEventListener('click', () => {
-      hiddenMessage.classList.toggle('show');
-      revealButton.textContent = hiddenMessage.classList.contains('show')
-        ? 'Refermer le dernier mot'
-        : 'Voir le dernier mot';
-    });
+    const responseBox = document.getElementById('responseBox');
+
+    if (revealButton && hiddenMessage) {
+      revealButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const isOpen = hiddenMessage.classList.toggle('show');
+        if (responseBox) {
+          responseBox.classList.toggle('show', isOpen);
+        }
+        revealButton.textContent = isOpen
+          ? 'Refermer le dernier mot'
+          : 'Voir le dernier mot';
+      });
+    }
+  });
   </script>
 </body>
 </html>
