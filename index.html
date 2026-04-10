@@ -415,6 +415,7 @@
     const hiddenMessage = document.getElementById('hiddenMessage');
     const seal = document.getElementById('seal');
     const envelope = document.getElementById('envelope');
+    const envelopeScene = document.getElementById('envelopeScene');
 
     openInvitation.addEventListener('click', () => {
       intro.style.display = 'none';
@@ -422,8 +423,8 @@
     });
 
     const openEnvelope = () => {
-      if (!envelope.classList.contains('open')) {
-        envelope.classList.add('open');
+      if (!envelopeScene.classList.contains('open')) {
+        envelopeScene.classList.add('open');
       }
     };
 
@@ -435,9 +436,7 @@
     }
 
     if (envelope) {
-      envelope.addEventListener('click', openEnvelope);
-      envelope.style.cursor = 'pointer';
-    }
+      envelope.addEven
 
     revealButton.addEventListener('click', () => {
       hiddenMessage.classList.toggle('show');
