@@ -7,16 +7,17 @@
   <meta name="description" content="Invitation privée" />
   <style>
     :root {
-      --bg: #0f0c0a;
-      --bg-soft: #1a1410;
-      --gold: #d8b46a;
-      --gold-soft: #b9924b;
-      --paper: #f7ecd8;
-      --paper-shadow: #ead9bb;
-      --ink: #3b2a1e;
-      --wax: #8b1e2d;
+      --bg: #f8f4ee;
+      --bg-soft: #fffaf4;
+      --gold: #d4af37;
+      --gold-soft: #b68a1f;
+      --paper: #fffdf9;
+      --paper-shadow: #f3eadf;
+      --ink: #3e1f23;
+      --wax: #9e1b32;
+      --wax-dark: #7d1427;
       --white: #fffdf8;
-      --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+      --shadow: 0 20px 60px rgba(80, 34, 42, 0.16);
     }
 
     * { box-sizing: border-box; }
@@ -27,9 +28,9 @@
       min-height: 100%;
       font-family: Georgia, "Times New Roman", serif;
       background:
-        radial-gradient(circle at top, rgba(216, 180, 106, 0.08), transparent 30%),
-        linear-gradient(180deg, #120e0b 0%, #0b0908 100%);
-      color: var(--white);
+        radial-gradient(circle at top, rgba(212, 175, 55, 0.10), transparent 30%),
+        linear-gradient(180deg, #fffaf6 0%, #f7efe6 100%);
+      color: #4b1f28;
       overflow-x: hidden;
     }
 
@@ -39,12 +40,12 @@
       inset: 0;
       pointer-events: none;
       background-image:
-        radial-gradient(circle at 15% 20%, rgba(255,255,255,.15) 0 1px, transparent 1px),
-        radial-gradient(circle at 80% 30%, rgba(255,255,255,.12) 0 1px, transparent 1px),
-        radial-gradient(circle at 65% 70%, rgba(255,255,255,.10) 0 1px, transparent 1px),
-        radial-gradient(circle at 30% 80%, rgba(255,255,255,.12) 0 1px, transparent 1px);
+        radial-gradient(circle at 15% 20%, rgba(158,27,50,.08) 0 1px, transparent 1px),
+        radial-gradient(circle at 80% 30%, rgba(212,175,55,.10) 0 1px, transparent 1px),
+        radial-gradient(circle at 65% 70%, rgba(158,27,50,.06) 0 1px, transparent 1px),
+        radial-gradient(circle at 30% 80%, rgba(212,175,55,.08) 0 1px, transparent 1px);
       background-size: 260px 260px, 320px 320px, 280px 280px, 340px 340px;
-      opacity: .45;
+      opacity: .5;
     }
 
     .screen {
@@ -57,8 +58,8 @@
 
     .card {
       width: min(92vw, 720px);
-      border: 1px solid rgba(216, 180, 106, 0.24);
-      background: linear-gradient(180deg, rgba(26,20,16,.82), rgba(15,12,10,.9));
+      border: 1px solid rgba(212, 175, 55, 0.28);
+      background: linear-gradient(180deg, rgba(255,253,248,.92), rgba(255,249,240,.9));
       backdrop-filter: blur(10px);
       border-radius: 28px;
       box-shadow: var(--shadow);
@@ -69,7 +70,7 @@
     .eyebrow {
       letter-spacing: .35em;
       text-transform: uppercase;
-      color: rgba(216, 180, 106, .9);
+      color: rgba(158, 27, 50, .9);
       font-size: 12px;
       margin-bottom: 18px;
     }
@@ -439,17 +440,17 @@
     const experience = document.getElementById('experience');
     const openInvitation = document.getElementById('openInvitation');
     const revealButton = document.getElementById('revealButton');
+    const hiddenMessage = document.getElementById('hiddenMessage');
     const seal = document.getElementById('seal');
     const envelope = document.getElementById('envelope');
-    const hiddenMessage = document.getElementById('hiddenMessage');
 
     openInvitation.addEventListener('click', () => {
       intro.style.display = 'none';
       experience.classList.add('active');
-
-      // ouverture uniquement via le cachet
-      // (on enlève l'ouverture automatique)
     });
+
+    seal.addEventListener('click', () => {
+      envelope.classList.add('open');
     });
 
     revealButton.addEventListener('click', () => {
@@ -457,11 +458,6 @@
       revealButton.textContent = hiddenMessage.classList.contains('show')
         ? 'Refermer le dernier mot'
         : 'Voir le dernier mot';
-    });
-
-    // ouverture au clic sur le cachet
-    seal.addEventListener('click', () => {
-      envelope.classList.add('open');
     });
   </script>
 </body>
